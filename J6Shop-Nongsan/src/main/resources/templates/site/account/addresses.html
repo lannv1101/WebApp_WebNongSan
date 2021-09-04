@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+th:replace="~{/site/layout/index::dynamic(~{::title},~{::main})}">
+
+<head>
+    
+    <title>Account | Market</title>
+
+    
+</head>
+
+<body>
+   
+   <main>
+  <!-- Hero Section Begin -->
+  <section class="hero hero-normal">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="hero__categories">
+                    <div class="hero__categories__all">
+                        <i class="fa fa-bars"></i>
+                        <span>All departments</span>
+                    </div>
+                    <ul>
+                        <li th:each=" cates: ${cates}"><a th:href="@{|/lanmarket/shop/product/list?cid=${cates.id}|}">[[${cates.name}]]</a></li>                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="hero__search">
+                    <div class="hero__search__form">
+                        <form action="#">
+                            <div class="hero__search__categories">
+                                All Categories
+                                <span class="arrow_carrot-down"></span>
+                            </div>
+                            <input type="text" placeholder="What do yo u need?">
+                            <button type="submit" class="site-btn">SEARCH</button>
+                        </form>
+                    </div>
+                    <div class="hero__search__phone">
+                        <div class="hero__search__phone__icon">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                        <div class="hero__search__phone__text">
+                            <h5>+65 11.188.888</h5>
+                            <span>support 24/7 time</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Hero Section End -->
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="/assert/img/breadcrumb.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Địa chỉ</h2>
+                    <div class="breadcrumb__option">
+                        <a th:href="@{lanmarket/home}">Trang chủ</a>
+                        <span>Địa chỉ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+    </symbol>
+    <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+    </symbol>
+    <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+    </symbol>
+  </svg>
+<div th:if="${success!=null}" style="margin-left: 350px;"  class="alert alert-success d-flex align-items-center mt-3 col-6" role="alert">
+   
+        <div class="ml-1 text-center" >
+            <svg style="margin-left: 210px;" class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+
+          [[${success}]]
+       
+    </div>
+   
+  </div>
+ <!-- Start My Account  -->
+ <h3 class="text-center mt-2" > <a th:href="@{/lanmarket/account/addressbook/new}" style="color: #7fad39;">Thêm địa chỉ mới</a> </h3>
+ <div class="row m-1 mt-5">
+    
+    <div class="col-sm-6 " >
+        <div class="card" th:classappend="${usePrimaryAddressAsDefault ? 'bg-warning':''}" >
+            <div class="row">
+                <div class="col">
+                    <h5 class="card-header">Địa chỉ giao hàng mặc định</h5>
+                </div>
+                <div class="col">
+                    <div class="float-right mr-1" >
+                        <a href="" style="color: rgb(3, 3, 3);" class="fa fa-edit icon-dark" title="Chỉnh sửa địa chỉ giao hàng"  > <i  ></i></a>
+                        &nbsp;
+                        <a style="color: rgb(3, 3, 3);" th:if="${usePrimaryAddressAsDefault==false}" href="" class="fa fa-trash icon-dark" title="Xóa địa chỉ giao hàng"  > <i  ></i></a>
+
+                    </div>
+                </div>
+                
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">[[${account.username}]]</h5>
+              <p class="card-text">[[${account.first_name}]] [[${account.last_name}]], Địa chỉ 1: [[${account.address_line1}]],
+                   Địa chỉ 2: [[${account.address_line2}]], Thành phố: [[${account.city}]], Quận: [[${account.state}]], Mã vùng: [[${account.postal_code}]],
+                    Số điện thoại: [[${account.phone_number}]] .</p>
+              <a href="#"  th:if="${usePrimaryAddressAsDefault==false}" class="btn btn-outline-light" style="background-color: #7fad39;">Đặt làm địa chỉ giao hàng</a>
+            </div>
+          </div>
+     </div>
+     <div class="col-sm-6" th:each="ad,status : ${listaddress}">
+        <div class="card " th:classappend="${ad.address_default ? 'bg-warning':''}" >
+            <div class="row">
+                <div class="col">
+                    <h5 class="card-header">Địa chỉ giao hàng [[${status.count+1}]]</h5>
+                </div>
+                <div class="col">
+                    <div class="float-right mr-1">
+                        <a style="color: rgb(3, 3, 3);" th:href="@{'/lanmarket/account/addressbook/edit/'+${ad.id}}"  class="fa fa-edit icon-dark" title="Chỉnh sửa địa chỉ giao hàng"  > <i  ></i></a>
+                        &nbsp;
+                        <a th:data-id="${ad.id}" 
+                        onclick="showConfirmModalDialog(this.getAttribute('data-id'))"
+                        
+                        style="color: rgb(3, 3, 3);" th:if="${ad.address_default==false}"    > <i class="fa fa-trash icon-dark linkDelete" title="Xóa địa chỉ giao hàng"  ></i></a>
+
+                    </div>
+                </div>
+                
+            </div>
+           
+            <div class="card-body">
+              <h5 class="card-title">[[${ad.account.username}]]</h5>
+              <p class="card-text">[[${ad.first_name}]] [[${ad.last_name}]], Địa chỉ 1: [[${ad.address_line1}]],
+                   Địa chỉ 2: [[${ad.address_line2}]], Thành phố: [[${ad.city}]], Quận: [[${ad.state}]], Mã vùng: [[${ad.postal_code}]],
+                    Số điện thoại: [[${ad.phone_number}]] .</p>
+              <a th:if="${ad.address_default==false}" href="#" class="btn btn-outline-light" style="background-color: #7fad39;">Đặt làm địa chỉ giao hàng</a>
+            </div>
+          </div>
+     </div>
+     
+   
+ </div>
+
+
+ <!-- Button trigger modal -->
+ 
+ <script>
+    function showConfirmModalDialog(id){
+        $('#yesOption').attr('href','/lanmarket/account/addressbook/delete/'+id);
+        $('#modelId').modal('show');
+        
+    }
+   
+</script>
+
+
+<!-- Modal -->
+<div class="modal fade text-center" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xóa địa chỉ giao hàng</h5>
+                    <button  type="button" class="close" data-dismiss="modal"  aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <!-- khong close duoc modal -->
+            </div>
+            <div class="modal-body">
+               Bạn có muốn xóa địa chỉ giao hàng này?
+            </div>
+            <div class="modal-footer">
+                <a id="yesOption" type="button" class="btn btn-success" >Có, tôi muốn</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+                <!-- khong close duoc modal -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End My Account -->
+
+ 
+   </main>
+   
+   
+  
+
+
+
+</body>
+
+
+        
+  
+
+
+</html>

@@ -1,0 +1,170 @@
+
+
+<div class="card shadow mb-4">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
+     Thêm mới danh mục
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <form novalidate multiple name="formcategory">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Thông tin danh mục</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                          <label for="">Tên danh mục</label>
+                          <span style="color: red;">*</span>
+                          <input type="text" ng-model="form.name"  name="category" id="category" class="form-control" placeholder="" aria-describedby="helpId" required>
+                          <small ng-show="formcategory.category.$error.required && formcategory.category.$pristine" style="color: red;">Không bỏ trống tên danh mục</small>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success btn-icon-split"  ng-click="create()" class="close" data-dismiss="modal" aria-label="Close">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                            <span class="text">Thêm</span>
+                        </button>          
+                        <button class="btn btn-warning btn-icon-split"  ng-click="update()"  class="close" data-dismiss="modal" aria-label="Close">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-retweet"></i>
+                            </span>
+                            <span class="text">Cập nhật</span>
+                        </button>       
+                        <button class="btn btn-danger btn-icon-split"  ng-click="delete(form)"  class="close" data-dismiss="modal" aria-label="Close">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-trash-alt"></i>
+                            </span>
+                            <span class="text">Xóa</span>
+                        </button>       
+                        <button class="btn btn-dark btn-icon-split" ng-click="reset()">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-redo-alt"></i>
+                            </span>
+                            <span class="text">Reset</span>
+                        </button>     
+                    </div>
+            </form>
+            </div>
+        </div>
+    </div>
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Bảng danh mục</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="dataTables_length" id="dataTable_length"><label>Hiển thị 
+                            <select name="dataTable_length" id="dataTable_length"
+                                    aria-controls="dataTable"
+                                    class="custom-select custom-select-sm form-control form-control-sm" ng-click="pager.showitems()"  >
+                                    <option selected value="5">5</option>
+                                    <option  value="10">10</option>
+                                    <option  value="25">25</option>
+                                    <option  value="50">50</option>
+                                    <option  value="100">100</option>
+                                </select> entries</label></div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div id="dataTable_filter" class="float-right"><label>Tìm kiếm:<input type="search" 
+                                    class="form-control form-control-sm" placeholder="" id="search"
+                                    aria-controls="dataTable"></label></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0"
+                            role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                        colspan="1" aria-sort="ascending"
+                                        aria-label="Name: activate to sort column descending" style="width: 400px;">
+                                        Mã danh mục</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending" style="width: 500px;">
+                                        Tên danh mục</th>
+                                   
+                                    
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th rowspan="1" colspan="1">Mã danh mục</th>
+                                    <th rowspan="1" colspan="1">Tên danh mục</th>
+                                   
+                                   
+                                </tr>
+                            </tfoot>
+                            <tbody>
+
+                                <tr class="even" ng-repeat="p in pager.items">
+                                    <td class="sorting_1">{{p.id}}</td>
+                                    <td class="inline">
+                                        {{p.name}}
+                                       
+                                    </td>
+                             
+                                    <td><button ng-click="edit(p)" data-toggle="modal" data-target="#modelId" class="btn btn-primary btn-circle btn-sm ml-2" >
+                                        <i class="far fa-edit"></i>
+                                    </button>
+                                    <button ng-click="delete(p)"   class="btn btn-danger btn-circle btn-sm ml-2" >
+                                        <i class="fas fa-trash"></i>
+                                    </button>    
+                                   
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-5">
+                        <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Hiển thị 1
+                            to {{pager.countshowitems}} đến {{pager.countitems}} mục</div>
+                    </div>
+                    <div class="col-sm-12 col-md-7">
+                        <div class="float-right" id="dataTable_paginate">
+                            <ul class="pagination">
+                                <li class="paginate_button page-item previous" id="dataTable_previous">
+                                    
+                                    <button ng-click="pager.prev()"
+                                         aria-controls="dataTable" data-dt-idx="0" tabindex="0"
+                                        class="page-link">Lùi</button></li>
+                                <li  class="paginate_button page-item active"><button  aria-controls="dataTable"
+                                        data-dt-idx="1" tabindex="0" class="page-link">{{pager.page+1}}</button></li>
+                                        <li class="paginate_button page-item "><button disabled aria-controls="dataTable"
+                                            data-dt-idx="2" tabindex="0" class="page-link">Của</button></li>
+                                <li class="paginate_button page-item "><button  aria-controls="dataTable"
+                                        data-dt-idx="2" tabindex="0" class="page-link">{{pager.count}}</button></li>
+                              
+                                <li class="paginate_button page-item next" id="dataTable_next"><button
+                                        aria-controls="dataTable" data-dt-idx="7" tabindex="0"
+                                        class="page-link"
+                                        
+                                        ng-click="pager.next()"
+                                        >Tiến</button></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->

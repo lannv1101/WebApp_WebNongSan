@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+th:replace="~{/site/layout/index::dynamic(~{::title},~{::main})}">
+
+<head>
+    
+    <title>Checkout | Market</title>
+
+    
+</head>
+
+
+   
+   <main>
+  <!-- Hero Section Begin -->
+  <section class="hero hero-normal">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="hero__categories">
+                    <div class="hero__categories__all">
+                        <i class="fa fa-bars"></i>
+                        <span>All departments</span>
+                    </div>
+                    <ul>
+                        <li th:each=" cates: ${cates}"><a th:href="@{|/lanmarket/shop/product/list?cid=${cates.id}|}">[[${cates.name}]]</a></li>                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="hero__search">
+                    <div class="hero__search__form">
+                        <form action="#">
+                            <div class="hero__search__categories">
+                                All Categories
+                                <span class="arrow_carrot-down"></span>
+                            </div>
+                            <input type="text" placeholder="What do yo u need?">
+                            <button type="submit" class="site-btn">SEARCH</button>
+                        </form>
+                    </div>
+                    <div class="hero__search__phone">
+                        <div class="hero__search__phone__icon">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                        <div class="hero__search__phone__text">
+                            <h5>+65 11.188.888</h5>
+                            <span>support 24/7 time</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Hero Section End -->
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="/assert/img/breadcrumb.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Checkout</h2>
+                    <div class="breadcrumb__option">
+                        <a th:href="@{lanmarket/home}">Home</a>
+                        <span>Checkout</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Checkout Section Begin -->
+<section class="checkout spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h6><span class="icon_tag_alt"></span> Có mã giảm giá? <a href="#">Nhấn vào đây</a> để sử dụng mã giảm giá
+                </h6>
+            </div>
+        </div>
+        <div class="checkout__form" >
+            <h4>Chi tiết thanh toán</h4>
+            <div   >
+                <div class="row">
+                    <div class="col-lg-8 col-md-6">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="checkout__input">
+                                    <p>Tên Người Đặt Hàng<span>*</span></p>
+                                    <!-- <input id="username" type="text" th:value="${#request.remoteUser}"> -->
+                                    <!-- <div id="username" name="username" th:value="${#request.remoteUser}">  [[${#request.remoteUser}]]</div> -->
+                                    <div class="div-username form-control" style=" color: rgb(255, 2, 2);"  id="username" readonly  >[[${#request.remoteUser}]] </div>
+
+                                
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Last Name<span>*</span></p>
+                                    <input type="text">
+                                </div>
+                            </div> -->
+                        </div>
+                        <!-- <div class="checkout__input">
+                            <p>Country<span>*</span></p>
+                            <input type="text">
+                        </div> -->
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="checkout__input">
+                                    <p>Ngày Đặt Hàng<span>*</span></p>
+                                    <div style=" color: rgb(255, 2, 2); width: 750px;" readonly  class="form-control">{{order.createDate| date: 'dd-MM-yyyy'}}</div>
+                                    <!-- <input type="text" th:value="${order.createDate | date: 'dd-MM-yyyy'}"> -->
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Email<span>*</span></p>
+                                    <input type="text">
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="checkout__input">
+                            <p>Địa Chỉ<span>*</span></p>
+                            <input ng-model="order.address" style=" color: rgb(255, 2, 2); height: 200px;"  placeholder="Street Address" class="checkout__input__add"></input>
+                            <!-- <input type="text" placeholder="Apartment, suite, unite ect (optinal)"> -->
+                        </div>
+                       
+                        <!-- <div class="checkout__input">
+                            <p>Country/State<span>*</span></p>
+                            <input type="text">
+                        </div> -->
+                       
+                     
+                       <div class="card text-left">
+                         <img class="card-img-top" th:src="@{holder.js/100px180/}" alt="">
+                         <div class="card-body">
+                           <h4 class="card-title">Phương thức thanh toán</h4>
+                           <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              <h5>
+                                Thanh toán khi nhận hàng
+                              </h5>
+                            </label>
+                            
+                          </div>
+                         
+                          <div class="mt-3">
+                            <h4 class="card-title">Thanh toán trước</h4>
+                            <paypal-buttons props="opts"></paypal-buttons>
+                          </div>
+                           
+                        
+                           
+
+                        
+                         </div>
+                       </div>
+                       
+                    </div>
+                  
+                    <div class="col-lg-4 col-md-6">
+                        <div class="checkout__order">
+                            <h4>Đặt hàng của bạn</h4>
+                            <div class="checkout__order__products">Sản Phẩm <span>Tổng cộng</span></div>
+                            <ul>
+                                <li ng-repeat="c in cart.items">{{c.name}} <span>{{c.price|number}} VND</span></li>
+                                
+                            </ul>
+                            <div class="checkout__order__subtotal">Trước <span>{{cart.amount | number :2}} VND</span></div>
+                            <div class="checkout__order__total">Giảm giá <span >-{{cart.amount-cart.amountdiscount | number :2}} VND</span></div>
+                            <div class="checkout__order__total" id="amount" name="amount" >Tổng thanh toán <span>{{cart.amountdiscount | number :2}} VND</span></div>
+                            <!-- <div class="checkout__input__checkbox">
+                                <label for="acc-or">
+                                    Create an account?
+                                    <input type="checkbox" id="acc-or">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                           
+                            <div class="checkout__input__checkbox">
+                                <label for="payment">
+                                    Check Payment
+                                    <input type="checkbox" id="payment">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="checkout__input__checkbox">
+                                <label for="paypal">
+                                    Paypal
+                                    <input type="checkbox" id="paypal">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div> -->
+                            <div class="center">
+
+                                <button id="open-popup-btn"  ng-click="order.purchase()" class="site-btn">ĐẶT HÀNG</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Checkout Section End -->
+
+ 
+   </main>
+
+
+
+
+
+        
+  
+
+
+</html>

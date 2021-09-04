@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+th:replace="~{/site/layout/index::dynamic(~{::title},~{::main})}">
+
+<head>
+  
+    <title>Orders | Market</title>
+
+   
+</head>
+
+<body>
+   
+    <main>
+  
+
+    <!-- Hero Section Begin -->
+    <section class="hero hero-normal">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="hero__categories">
+                        <div class="hero__categories__all">
+                            <i class="fa fa-bars"></i>
+                            <span>Tất Cả Danh Mục</span>
+                        </div>
+                        <ul>
+                            <li th:each=" cates: ${cates}"><a th:href="@{|/lanmarket/shop/product/list?cid=${cates.id}|}">[[${cates.name}]]</a></li>                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form action="#">
+                                <div class="hero__search__categories">
+                                    Tất Cả Danh Mục
+                                    <span class="arrow_carrot-down"></span>
+                                </div>
+                                <input type="text" placeholder="What do yo u need?">
+                                <button type="submit" class="site-btn">Tìm Kiếm</button>
+                            </form>
+                        </div>
+                        <div class="hero__search__phone">
+                            <div class="hero__search__phone__icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="hero__search__phone__text">
+                                <h5>+65 11.188.888</h5>
+                                <span>Hỗ Trợ 24/7</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="/assert/img/breadcrumb.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Danh Sách Đặt Hàng</h2>
+                        <div class="breadcrumb__option">
+                            <a th:href="@{lanmarket/home}">Trang Chủ</a>
+                            <span>Danh Sách Đặt Hàng</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Shoping Cart Section Begin -->
+    <section class="shoping-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping__cart__table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="shoping__product">STT.</th>
+                                    <th>Số Đặt Hàng.</th>
+                                    <th>
+                                       Ngày Đặt Hàng
+                                    </th>
+                                    <th>Địa Chỉ Giao Hàng</th>
+                                    <th>Trạng Thái</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="order,state : ${orders}">
+                                    <td class="shoping__cart__item" style="width: 300px;">
+                                        <h5>[[${state.index}]]</h5>
+                                       
+                                    </td>
+                                    <td class="shoping__cart__price" style="width: 300px;">
+                                        [[${order.id}]]
+                                    </td>
+                                    <td class="shoping__cart__price" style="width: 300px;">
+                                        [[${order.createDate}]]
+                                    </td>
+                                    <td class="shoping__cart__total" style="width: 300px;">
+                                        [[${order.address}]]
+                                    </td>
+                                    <td class="shoping__cart__total" style="width: 300px;">
+                                        <div class="" style="color: burlywood;" th:if="${order.status}==1">Đang chuẩn bị</div>
+                                        <div class="" style="color: rgb(253, 0, 0);" th:if="${order.status}==4">Đã hủy</div>
+                                        <div class="" style="color: rgb(255, 217, 0);" th:if="${order.status}==2">Đang giao hàng</div>
+                                        <div class="" style="color: rgb(32, 245, 12);" th:if="${order.status}==3">Thành công</div>
+                                        <div class="" style="color: rgb(180, 103, 1);" th:if="${order.status}==0" > 
+                                            
+                                            
+                                            Chờ xác nhận
+                                        
+                                                <a th:href="@{|/lanmarket/order/detail/update/${order.id}|}" class="btn btn-light" style="background-color: #7fad39;">  <span class="icon_blocked"></span></a>
+                                          
+                                        </div>
+                                    </td>
+                                    <td class="shoping__cart__item__close" >
+                                      <a th:href="@{|/lanmarket/order/detail/${order.id}|}" class="btn btn-light" style="background-color: #7fad39;">  <span class="icon_search"></span></a>
+                                    </td>
+                                </tr>
+                            
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+         
+        </div>
+    </section>
+    <!-- Shoping Cart Section End -->
+</main>
+   
+
+
+</body>
+
+</html>

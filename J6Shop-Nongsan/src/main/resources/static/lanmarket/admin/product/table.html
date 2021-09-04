@@ -1,0 +1,290 @@
+<div id="card-form" class="card shadow mb-4" >
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Thông tin sản phẩm</h6>
+    </div>
+    <div class="card-body">
+        <form novalidate multiple name="formproduct"> 
+            <div class="row" style="height: 230px;">
+                <div class="col-7">
+                    <img ng-src="{{'/lanmarket/assert/upload/images/'+form.image}}"
+                        style="width: 300px; height: 230px;">
+                </div>
+                <div class="col-5">
+
+                    <div class="form-group">
+                        <label for="image">Thêm ảnh</label>
+                        <span style="color: red;">*</span>
+
+                        <input type="file" class="form-control-file" id="image" name="image" required
+                            onchange="angular.element(this).scope().imageChanged(this.files)">
+
+                            <small ng-show="formproduct.image.$error.required && formproduct.image.$pristine" style="color: red;">Vui lòng chọn ảnh sản phẩm</small>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+            <hr>
+            <div class="row">
+
+
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Tên sản phẩm</label>
+                        <span style="color: red;">*</span>
+                        <input type="text" class="form-control" name="name" ng-model="form.name" required>
+                        <small ng-show="formproduct.name.$error.required && formproduct.name.$pristine" style="color: red;">Không bỏ trống tên sản phẩm</small>
+                       
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Số lượng</label>
+                        <span style="color: red;">*</span>
+                        <input type="number" class="form-control " name="quantity" ng-model="form.quantity" required min="1"
+                        
+                        > 
+                        <small ng-show="formproduct.quantity.$error.required && formproduct.quantity.$pristine" style="color: red;">Không bỏ số lượng</small>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Giá</label>
+                        <span style="color: red;">*</span>
+                        <input type="text" class="form-control" name="price" ng-model="form.price" required ng-pattern="/^[0-9]*$/">
+                        <small ng-show="formproduct.price.$error.required && formproduct.price.$pristine" style="color: red;">Không bỏ trống giá tiền</small>
+                        <small ng-show="formproduct.price.$dirty && formproduct.price.$error.pattern" style="color: red;">Số lượng phải là số dương</small>
+
+                    </div>
+
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Danh mục</label>
+                        <span style="color: red;">*</span>
+                        <select ng-model="form.category.id" class="form-control" aria-label="Default select example"  name="category" required>
+                            <option selected value="0">Open this select menu</option>
+                            <option ng-repeat="c in cates" ng-value="c.id">{{c.name}}</option>
+
+                        </select>
+                        <small ng-show="formproduct.category.$error.required && formproduct.category.$pristine" style="color: red;">Không bỏ trống danh mục sản phẩm</small>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Ngày tạo</label>
+                        <span style="color: red;">*</span>
+                        <input ng-model="form.createDate" name="date" type="date" class="form-control" required>
+                        <small ng-show="formproduct.date.$error.required && formproduct.date.$pristine" style="color: red;">Không bỏ trống ngày thêm sản phẩm</small>
+                    </div>
+                    <label for="">Khả dụng</label>
+                    <span style="color: red;">*</span>
+                    <div class="card">
+
+                        <div class="form-check form-check-inline">
+                            <input ng-model="form.available" class="form-check-input" type="radio" ng-value="true">
+                            <label class="form-check-label" for="inlineRadio1">Có</label>
+                            <input ng-model="form.available" class="form-check-input ml-5" type="radio"
+                                ng-value="false">
+                            <label class="form-check-label" for="inlineRadio2">Không</label>
+                        </div>
+
+                    </div>
+                 
+                
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Mô tả</label>
+                        <span style="color: red;">*</span>
+                        <textarea ng-model="form.description" class="form-control"></textarea>
+                    </div>
+
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Giảm giá</label>
+                        <span style="color: red;">*</span>
+                        <input type="number" ng-model="form.discount" class="form-control"></input>
+                    </div>
+
+                </div>
+            </div>
+            
+
+
+            <button class="btn btn-success btn-icon-split" ng-click="create()">
+                <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                </span>
+                <span class="text">Thêm</span>
+            </button>
+            <button class="btn btn-warning btn-icon-split" ng-click="update()">
+                <span class="icon text-white-50">
+                    <i class="fas fa-retweet"></i>
+                </span>
+                <span class="text">Cập nhật</span>
+            </button>
+            <button class="btn btn-danger btn-icon-split" ng-click="delete(form)">
+                <span class="icon text-white-50">
+                    <i class="fas fa-trash-alt"></i>
+                </span>
+                <span class="text">Xóa</span>
+            </button>
+            <button class="btn btn-dark btn-icon-split" ng-click="reset()">
+                <span class="icon text-white-50">
+                    <i class="fas fa-redo-alt"></i>
+                </span>
+                <span class="text">Reset</span>
+            </button>
+
+
+
+
+        </form>
+    </div>
+</div>
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Bảng sản phẩm</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="dataTables_length" id="dataTable_length"><label>Hiển thị
+                                <select name="dataTable_length" id="dataTable_length" aria-controls="dataTable"
+                                    class="custom-select custom-select-sm form-control form-control-sm"
+                                    ng-click="pager.showitems()">
+                                    <option selected value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select> entries</label></div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div id="dataTable_filter" class="float-right"><label>Tìm kiếm:<input type="text" id="name" name="name"
+                                    class="form-control form-control-sm" placeholder=""
+                                    aria-controls="dataTable"
+                                   
+                                    ></label></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0"
+                            role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                        colspan="1" aria-sort="ascending"
+                                        aria-label="Name: activate to sort column descending" style="width: 50px;">
+                                        Mã</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending" style="width: 200px;">
+                                        Tên</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                        aria-label="Office: activate to sort column ascending" style="width: 50px;">
+                                        Giá</th>
+
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                        aria-label="Salary: activate to sort column ascending" style="width: 20px;">
+                                        Số lượng</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                        aria-label="Age: activate to sort column ascending" style="width: 115px;">Date
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                        aria-label="Age: activate to sort column ascending" style="width: 115px;">
+                                        Giảm giá
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                        aria-label="Start date: activate to sort column ascending"
+                                        style="width: 120px;">Danh mục</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                        aria-label="Salary: activate to sort column ascending" style="width: 20px;">
+                                        Khả dụng?</th>
+
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                        aria-label="Salary: activate to sort column ascending" style="width: 110px;">
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th rowspan="1" colspan="1">Mã</th>
+                                    <th rowspan="1" colspan="1">Tên</th>
+                                    <th rowspan="1" colspan="1">Giá</th>
+                                    <th rowspan="1" colspan="1">Số lượng</th>
+                                    <th rowspan="1" colspan="1">Ngày</th>
+                                    <th rowspan="1" colspan="1">Giảm giá</th>
+                                    <th rowspan="1" colspan="1">Danh mục</th>
+                                    <th rowspan="1" colspan="1">Khả dụng?</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+
+                                <tr class="even" ng-repeat="p in pager.items">
+                                    <td class="sorting_1">{{p.id}}</td>
+                                    <td class="inline">
+                                        <img ng-src="{{'/lanmarket/assert/upload/images/'+p.image}}" class="image-fluid"
+                                            style="width: 50%;">
+                                        {{p.name}}
+
+                                    </td>
+                                    <td>{{p.price | number:2}}</td>
+                                    <td>{{p.quantity}}</td>
+                                    <td>{{p.createDate|date:'dd-MM-yyyy'}}</td>
+                                    <td>{{p.discount}}%</td>
+                                    <td>{{p.category.name}}</td>
+                                    <td style="color: rgb(6, 247, 38);" ng-if="p.available==1">Có </td>
+                                    <td style="color: red;" ng-if="p.available==0 ">Không </td>
+                                    <td><button ng-click="edit(p)" class="btn btn-primary btn-circle btn-sm ml-2">
+                                            <i class="far fa-edit"></i>
+                                        </button>
+                                        <button ng-click="delete(p)" class="btn btn-danger btn-circle btn-sm ml-2">
+                                            <i class="fas fa-trash"></i>
+                                        </button> <!-- Modal -->
+
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-5">
+                        <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Hiển thị 1
+                            đến {{pager.countshowitems}} trong {{pager.countitems}} entries</div>
+                    </div>
+                    <div class="col-sm-12 col-md-7">
+                        <div class="float-right" id="dataTable_paginate">
+                            <ul class="pagination">
+                                <li class="paginate_button page-item previous" id="dataTable_previous">
+
+                                    <button ng-click="pager.prev()" aria-controls="dataTable" data-dt-idx="0"
+                                        tabindex="0" class="page-link">Lùi</button></li>
+                                <li class="paginate_button page-item active"><button aria-controls="dataTable"
+                                        data-dt-idx="1" tabindex="0" class="page-link">{{pager.page+1}}</button></li>
+                                <li class="paginate_button page-item "><button disabled aria-controls="dataTable"
+                                        data-dt-idx="2" tabindex="0" class="page-link">đến</button></li>
+                                <li class="paginate_button page-item "><button aria-controls="dataTable" data-dt-idx="2"
+                                        tabindex="0" class="page-link">{{pager.count}}</button></li>
+
+                                <li class="paginate_button page-item next" id="dataTable_next"><button
+                                        aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link"
+                                        ng-click="pager.next()">Tiến</button></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

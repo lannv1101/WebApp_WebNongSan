@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="UTF-8" xmlns:th="http://www.thymeleaf.org" th:fragment="dynamic(title,main)">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title th:replace="${title}"></title>
+
+    <!-- Google Font -->
+    
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap}" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" th:href="@{/assert/css/bootstrap.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/assert/css/font-awesome.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/assert/css/elegant-icons.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/assert/css/nice-select.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/assert/css/jquery-ui.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/assert/css/owl.carousel.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/assert/css/slicknav.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/assert/css/style.css}" type="text/css">
+
+    <!-- css account dang tranh chap vs css main -->
+    <link rel="stylesheet" th:href="@{/assert/css/account/style.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/assert/css/notification/notification.css}" type="text/css">
+
+
+<script th:src="@{https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js}"></script>
+<script th:src="@{https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js}"></script>
+
+</head>
+
+<body ng-app="shopping-cart-app" ng-controller="shopping-cart-ctrl">
+  
+    <!-- Humberger End -->
+
+    <!-- Header Section Begin -->
+    <header class="header">
+       <div th:replace="/site/layout/header.html"></div>
+    </header>
+    <!-- Header Section End -->
+
+  
+
+    <!-- Main section begin -->
+    <div th:replace="${main}">
+       
+    </div>
+
+    <!-- Main section end -->
+   
+    <!-- Footer Section Begin -->
+    <footer class="footer spad">
+        <div th:replace="/site/layout/footer.html"></div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+    <script th:src="@{https://www.paypal.com/sdk/js?client-id=AegnddnGQewXKPNIERqe2ssJk7hkuz9MTq-4-wLL5NUynauWYte0tWsmh9JyppBhTjK6jT3enTamWnQ9}"></script>
+
+    <script th:src="@{/assert/js/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{/assert/js/bootstrap.min.js}"></script>
+    <script th:src="@{/assert/js/jquery.nice-select.min.js}"></script>
+    <script th:src="@{/assert/js/jquery-ui.min.js}"></script>
+    <script th:src="@{/assert/js/jquery.slicknav.js}"></script>
+    <script th:src="@{/assert/js/mixitup.min.js}"></script>
+    <script th:src="@{/assert/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/assert/js/main.js}"></script>
+    <script th:src="@{/assert/js/shopping-cart-app.js}"></script>
+<!-- JavaScript Bundle with Popper -->
+<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js}" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script th:src="@{https://code.jquery.com/jquery-3.4.1.js}"></script>
+    
+ 
+</body>
+
+</html>

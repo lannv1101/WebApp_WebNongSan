@@ -1,0 +1,94 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <div class="header__top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="header__top__left">
+                        <ul>
+                            <li><i class="fa fa-envelope"></i> hello@lanmarket.com</li>
+                            <li>Giao hàng miễn phí cho tất cả Đơn hàng 1.000.000VND
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="header__top__right">
+                        <div class="header__top__right__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                            <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                        </div>
+                        <div class="header__top__right__language">
+                            <img th:src="@{/assert/img/language_vn.png}" alt="">
+                            <div>  Vietnam </div>
+                            <span class="arrow_carrot-down"></span>
+                            <ul>
+                                <li><a href="#">Vietnam</a></li>
+                                <li><a href="#">English</a></li>
+                              
+                            </ul>
+                        </div>
+                        <div class="header__top__right__language">
+                           
+                            <div th:unless="${#request.remoteUser}" >  <a style="color: black;"  th:href="@{/lanmarket/security/login/form}"><i class="fa fa-sign-in"></i> Đăng nhập</a> </div>
+                            <div th:if="${#request.remoteUser}" >  <a style="color: black;"  th:href="@{/lanmarket/account/profile}"><i class="fa fa-user"></i> [[${#request.remoteUser}]] </a> </div>
+                            <span class="arrow_carrot-down"></span>
+                            <th:block th:if="${#request.remoteUser}">
+                                <ul >
+                                
+                                    <li> <a  th:href="@{/lanmarket/security/logoff}"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
+                                    <li> <a th:href="@{/lanmarket/order/list}"><i class="fa fa-list-ol"></i> Đặt hàng</a></li>
+                                    <li> <a  th:href="@{/lanmarket/account}"><i class="fa fa-user-circle-o"></i> Cá nhân</a></li>
+                                    <li th:if="${#request.isUserInRole('DIRE') or #request.isUserInRole('ADMIN')}"> <a th:href="@{/lanmarket/admin}"><i class="fa fa-check-square"></i> Admin</a></li>
+                                    
+                              
+                               
+                            </ul>
+                            </th:block>
+                           
+                        </div> 
+                      
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="header__logo">
+                    <a th:href="@{/lanmarket/home}"><img th:src="@{/assert/img/logo.png}" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <nav class="header__menu">
+                    <ul>
+                        <li class="active"><a th:href="@{/lanmarket/home}">Trang Chủ</a></li>
+                        <li><a th:href="@{/lanmarket/shop}">Cửa Hàng</a></li>
+                        <!-- <li><a th:href="@{/lanmarket/detail}">Shop Details</a></li> -->
+                        <!-- <li><a th:href="@{/lanmarket/cart}">Shoping Cart</a></li> -->
+                        <!-- <li><a th:href="@{/lanmarket/checkout}">Check Out</a></li> -->
+                        <li><a th:href="@{/lanmarket/blogdetail}">Nhật Ký Sản Phẩm</a></li>
+                        <li><a th:href="@{/lanmarket/blog}">Nhật Ký</a></li>
+                        <li><a th:href="@{/lanmarket/contact}">Liên Hệ</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-lg-3">
+                <div class="header__cart">
+                    <ul>
+                        <li><a th:href="@{/lanmarket/wishlist/view}"><i class="fa fa-heart"></i> <span>{{wishlist.countwishlist}}</span></a></li>
+                        <li><a th:href="@{/lanmarket/cart/view}"><i class="fa fa-shopping-bag"></i> <span>{{cart.count}}</span></a></li>
+                    </ul>
+                    <div class="header__cart__price">Sản phẩm: <span>{{cart.amountdiscount | number }} VND</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="humberger__open">
+            <i class="fa fa-bars"></i>
+        </div>
+    </div>
+
+</div>

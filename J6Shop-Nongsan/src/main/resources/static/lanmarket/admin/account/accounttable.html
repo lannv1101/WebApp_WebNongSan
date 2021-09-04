@@ -1,0 +1,305 @@
+<div class="card shadow mb-4">
+    <!-- Large modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Thêm mới tài
+        khoản</button>
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Thông tin tài khoản</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="reset()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div class="row" style="height: 150px;">
+                            <div class="col-7">
+                                <img ng-src="{{'/lanmarket/assert/upload/images/'+form.photo}}"
+                                    style="width: 200px; height: 150px;">
+                            </div>
+                            <div class="col-5">
+
+                                <div class="form-group">
+                                    <label for="image">Thêm ảnh</label>
+                                    <span style="color: red;">*</span>
+
+                                    <input type="file" class="form-control-file" id="photo"
+                                        onchange="angular.element(this).scope().imageChanged(this.files)">
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <hr>
+                        <div class="row">
+
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Tên tài khoản</label>
+                                    <span style="color: red;">*</span>
+                                    <input type="text" class="form-control" name="username" ng-model="form.username">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Mật khẩu</label>
+                                    <span style="color: red;">*</span>
+                                    <input type="password" class="form-control " ng-model="form.password"> </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Tên</label>
+                                    <span style="color: red;">*</span>
+                                    <input type="text" class="form-control" ng-model="form.fullname"> </div>
+
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email</label>
+                                    <span style="color: red;">*</span>
+                                    <input type="email" class="form-control" ng-model="form.email"> </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Ngày tạo</label>
+                                    <span style="color: red;">*</span>
+                                    <input ng-model="form.register_date" type="date" class="form-control">
+                                </div>
+                                <label for="">Khả dụng</label>
+                                <span style="color: red;">*</span>
+                                <div class="card">
+
+                                    <div class="form-check form-check-inline">
+                                        <input ng-model="form.enable" class="form-check-input" type="radio"
+                                            ng-value="true">
+                                        <label class="form-check-label" for="inlineRadio1">Có</label>
+                                        <input ng-model="form.enable" class="form-check-input ml-5" type="radio"
+                                            ng-value="false">
+                                        <label class="form-check-label" for="inlineRadio2">Không</label>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label for="exampleInputPassword1">Địa chỉ</label>
+                                <span style="color: red;">*</span>
+                                <textarea ng-model="form.address" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="exampleInputPassword1">Quyền truy cập</label>
+                                <span style="color: red;">*</span>
+                                <select  ng-model="form.role.id" class="form-control" aria-label="Default select example"  name="role" required>
+                                    <option selected value="0">Open this select menu</option>
+                                    <option ng-repeat="r in roles" ng-value="r.id">{{r.name}}</option>
+        
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success btn-icon-split" ng-click="create()" data-dismiss="modal">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span class="text">Thêm</span>
+                    </button>
+                    <button class="btn btn-warning btn-icon-split" ng-click="update()" data-dismiss="modal">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-retweet"></i>
+                        </span>
+                        <span class="text">Cập nhật</span>
+                    </button>
+                    <button class="btn btn-danger btn-icon-split" ng-click="delete(form)" data-dismiss="modal">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-trash-alt"></i>
+                        </span>
+                        <span class="text">Xóa</span>
+                    </button>
+                    <button class="btn btn-dark btn-icon-split" ng-click="reset()">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-redo-alt"></i>
+                        </span>
+                        <span class="text">Reset</span>
+                    </button>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Bảng tài khoản</h6>
+</div>
+<div class="card-body">
+    <div class="table-responsive">
+        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="dataTables_length" id="dataTable_length"><label>Hiển thị
+                            <select name="dataTable_length" id="dataTable_length" aria-controls="dataTable"
+                                class="custom-select custom-select-sm form-control form-control-sm"
+                                ng-click="pager.showitems()">
+                                <option selected value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select> entries</label></div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div id="dataTable_filter" class="float-right"><label>Tìm kiếm:<input type="search"
+                                class="form-control form-control-sm" placeholder="" id="search"
+                                aria-controls="dataTable"></label></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0"
+                        role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                    colspan="1" aria-sort="ascending"
+                                    aria-label="Name: activate to sort column descending" style="width: 200px;">
+                                    Tên tài khoản</th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                    aria-label="Position: activate to sort column ascending" style="width: 200px;">
+                                    Email</th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                    aria-label="Position: activate to sort column ascending" style="width: 300px;">
+                                    Tên</th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                    aria-label="Position: activate to sort column ascending" style="width: 200px;">
+                                    Ngày tạo</th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                    aria-label="Position: activate to sort column ascending" style="width: 100px;">
+                                    Hoạt động</th>
+
+
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th rowspan="1" colspan="1">Tên tài khoản</th>
+                                <th rowspan="1" colspan="1">Email</th>
+                                <th rowspan="1" colspan="1">Tên</th>
+                                <th rowspan="1" colspan="1"> Ngày tạo</th>
+                                <th rowspan="1" colspan="1">Hoạt động</th>
+
+
+
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr class="even" ng-repeat="p in pager.items">
+                                <td class="sorting_1">{{p.username}}</td>
+                                <td class="inline">
+                                    {{p.email}}
+
+                                </td>
+                                <td class="inline">
+                                    {{p.fullname}}
+
+                                </td>
+
+                                <td class="inline">
+                                    {{p.register_date| date: 'dd-MM-yyyy'}}
+
+                                </td>
+                                <td style="color: rgb(6, 247, 38);" ng-if="p.enable==1">Có </td>
+                                <td style="color: red;" ng-if="p.enable==0 ">Không </td>
+
+
+
+
+                                <td><button ng-click="edit(p)" data-toggle="modal" data-target=".bd-example-modal-lg"
+                                        class="btn btn-primary btn-circle btn-sm ml-2">
+                                        <i class="far fa-edit"></i>
+                                    </button>
+                                    <button ng-click="delete(p)" class="btn btn-danger btn-circle btn-sm ml-2">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-5">
+                    <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Hiển thị 1
+                        đến {{pager.countshowitems}} của {{pager.countitems}} bảng</div>
+                </div>
+                <div class="col-sm-12 col-md-7">
+                    <div class="float-right" id="dataTable_paginate">
+                        <ul class="pagination">
+                            <li class="paginate_button page-item previous" id="dataTable_previous">
+
+                                <button ng-click="pager.prev()" aria-controls="dataTable" data-dt-idx="0" tabindex="0"
+                                    class="page-link">Lùi</button></li>
+                            <li class="paginate_button page-item active"><button aria-controls="dataTable"
+                                    data-dt-idx="1" tabindex="0" class="page-link">{{pager.page+1}}</button></li>
+                            <li class="paginate_button page-item "><button disabled aria-controls="dataTable"
+                                    data-dt-idx="2" tabindex="0" class="page-link">Của</button></li>
+                            <li class="paginate_button page-item "><button aria-controls="dataTable" data-dt-idx="2"
+                                    tabindex="0" class="page-link">{{pager.count}}</button></li>
+
+                            <li class="paginate_button page-item next" id="dataTable_next"><button
+                                    aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link"
+                                    ng-click="pager.next()">Tiến</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="container">
+    <table class="table table-bordered border-primary">
+        <thead>
+            <tr>
+                <th>
+
+                </th>
+                <th ng-repeat="role in roles">{{role.name}}</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="acc in admins">
+
+                <td>{{acc.fullname}}</td>
+
+                <td ng-repeat="role in roles">
+
+
+                    <input type="checkbox" ng-checked="authority_of(acc,role)" ng-click="authority_changed(acc,role)">
+
+
+
+                </td>
+
+        </tbody>
+    </table>
+</div>
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->

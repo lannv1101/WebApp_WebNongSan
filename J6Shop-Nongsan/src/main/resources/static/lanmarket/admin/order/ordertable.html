@@ -1,0 +1,249 @@
+<div class="card shadow mb-4">
+    <!-- Large modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Đặt hàng đang chờ xác nhận</button>
+    
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thông tin đặt hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="reset()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div>
+                
+                    <div class="row">
+        
+        
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Tên người đặt</label>
+                                <span style="color: red;">*</span>
+                                <input type="text" class="form-control" ng-model="form.account.username" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Ngày đặt</label>
+                                <span style="color: red;">*</span>
+                                <input type="date" class="form-control " ng-model="form.createDate" disabled> </div>
+                        
+        
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Giá </label>
+                                <span style="color: red;">*</span>
+                                <input type="text" class="form-control" ng-model="form.amount" disabled> </div>
+                         
+                             
+                               
+                                <div class="form-group">
+                                    <label for="">Trạng thái</label>
+                                <span style="color: red;">*</span>
+                                    <select ng-model="form.status" class="custom-select" name="status" id="status">
+                                        <option selected>Select one</option>
+                                        <option value="1">Đang chuẩn bị</option>
+                                        <option value="2">Đang giao hàng</option>
+                                        <option value="3">Đã giao</option>
+                                        <option value="4">Đã hủy</option>
+                                    </select>
+                                </div>
+    
+                            
+                          
+                          
+                        </div>
+                    
+                            <div class="form-group col-12">
+                                <label for="exampleInputPassword1">Địa chỉ</label>
+                                <span style="color: red;">*</span>
+                                <textarea ng-model="form.address"  class="form-control" disabled></textarea> 
+                                               </div>  
+             
+                      
+                    </div>
+                </div>
+                <div class="modal-footer">
+                           
+                    <button class="btn btn-warning btn-icon-split"  ng-click="update()" data-dismiss="modal">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-retweet"></i>
+                        </span>
+                        <span class="text">Cập nhật</span>
+                    </button>       
+                         
+                        
+                   
+                    
+                  </div>
+              </div>
+              
+        </div>
+      </div>
+    </div>
+        <div class="card-header py-3">
+            <h4 class="m-0 font-weight-bold text-primary text-center">Danh sách đạt hàng</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="dataTables_length" id="dataTable_length"><label>Hiển thị
+                                    <select name="dataTable_length" id="dataTable_length" aria-controls="dataTable"
+                                        class="custom-select custom-select-sm form-control form-control-sm"
+                                        ng-click="pager.showitems()">
+                                        <option selected value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select> entries</label></div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div id="dataTable_filter" class="float-right"><label>Tìm kiếm:<input type="search"
+                                        class="form-control form-control-sm" placeholder="" id="search"
+                                        aria-controls="dataTable"></label></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0"
+                                role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                            colspan="1" aria-sort="ascending"
+                                            aria-label="Name: activate to sort column descending" style="width: 50px;">
+                                            Mã</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                            aria-label="Position: activate to sort column ascending" style="width: 100px;">
+                                            Tên</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                            aria-label="Position: activate to sort column ascending" style="width: 200px;">
+                                           Ngày tạo</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                            aria-label="Position: activate to sort column ascending" style="width: 150px;">
+                                            Giá</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                            aria-label="Position: activate to sort column ascending" style="width: 300px;">
+                                            Địa chỉ</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                            aria-label="Position: activate to sort column ascending" style="width: 100px;">
+                                            Trạng thái</th>
+                                           
+                                            
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th rowspan="1" colspan="1">Mã</th>
+                                        <th rowspan="1" colspan="1">Tên tài khoản</th>
+                                        <th rowspan="1" colspan="1">Ngày tạo</th>
+                                        <th rowspan="1" colspan="1"> Giá</th>
+                                        <th  rowspan="1" colspan="1">Địa chỉ</th>
+                                        <th  rowspan="1" colspan="1">Trạng thái</th>
+                                       
+    
+    
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    <tr class="even" ng-repeat="p in pager.items">
+                                        <td class="sorting_1">{{p.id}}</td>
+                                        <td class="inline">
+                                            {{p.account.username}}
+    
+                                        </td>
+                                        <td class="inline">
+                                            {{p.createDate| date: 'dd-MM-yyyy'}}
+    
+                                        </td>
+                                       
+                                        <td class="inline">
+                                            {{p.amount}} VND
+    
+                                        </td>
+                                        <td class="inline">
+                                            {{p.address}}
+    
+                                        </td>
+                                      
+                                        <td class="inline" ng-if="p.status==1" style="color: rgb(211, 140, 9);">
+                                          Đang chuẩn bị
+    
+                                        </td>
+                                        <td class="inline" ng-if="p.status==2" style="color: rgb(238, 255, 0);">
+                                           Đang gia hàng
+      
+                                          </td>
+                                          <td class="inline" ng-if="p.status==3" style="color: rgb(81, 255, 0);">
+                                            
+                                            Đã giao
+                                           </td>
+                                     
+                                           <td class="inline" ng-if="p.status==4" style="color: rgb(255, 30, 0);">
+                                            Đã hủy
+       
+                                           </td>
+                                           <td class="inline" ng-if="p.status==0" style="color: rgb(255, 123, 0);">
+                                            Chờ xác nhận
+       
+                                           </td>
+                                  
+                               
+    
+                                        <td><button ng-click="edit(p)" data-toggle="modal" data-target=".bd-example-modal-lg"
+                                                class="btn btn-primary btn-circle btn-sm ml-2">
+                                                <i class="far fa-edit"></i>
+                                            </button>
+                                            <button ng-click="delete(p)" class="btn btn-danger btn-circle btn-sm ml-2">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+    
+                                        </td>
+                                    </tr>
+                                   
+                                    
+                                </tbody>
+                            </table>
+                         
+    
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5">
+                            <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1
+                                to {{pager.countshowitems}} of {{pager.countitems}} entries</div>
+                        </div>
+                        <div class="col-sm-12 col-md-7">
+                            <div class="float-right" id="dataTable_paginate">
+                                <ul class="pagination">
+                                    <li class="paginate_button page-item previous" id="dataTable_previous">
+    
+                                        <button ng-click="pager.prev()" aria-controls="dataTable" data-dt-idx="0"
+                                            tabindex="0" class="page-link">Lùi</button></li>
+                                    <li class="paginate_button page-item active"><button aria-controls="dataTable"
+                                            data-dt-idx="1" tabindex="0" class="page-link">{{pager.page+1}}</button></li>
+                                    <li class="paginate_button page-item "><button disabled aria-controls="dataTable"
+                                            data-dt-idx="2" tabindex="0" class="page-link">của</button></li>
+                                    <li class="paginate_button page-item "><button aria-controls="dataTable" data-dt-idx="2"
+                                            tabindex="0" class="page-link">{{pager.count}}</button></li>
+    
+                                    <li class="paginate_button page-item next" id="dataTable_next"><button
+                                            aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link"
+                                            ng-click="pager.next()">Tiến</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <!-- Button trigger modal -->
+    
+    
+    <!-- Modal -->
