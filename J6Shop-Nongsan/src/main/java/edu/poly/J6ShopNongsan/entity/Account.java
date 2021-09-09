@@ -47,13 +47,14 @@ public class Account  implements Serializable {
     @Column(length =10, nullable = false )
     String postal_code;
     
-    @JsonIgnore
+    @JsonIgnore 
     @OneToMany(mappedBy = "account")
     List<Order> orders;
 
     @JsonIgnore
     @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
     List<Authority> authorities;
+
 
     @JsonIgnore
     @OneToMany(mappedBy = "account")

@@ -88,7 +88,7 @@ th:replace="~{/site/layout/index::dynamic(~{::title},~{::main})}">
                                     <th>
                                        Ngày Đặt Hàng
                                     </th>
-                                    <th>Địa Chỉ Giao Hàng</th>
+                                    <th>Tên người đặt hàng</th>
                                     <th>Trạng Thái</th>
                                     <th></th>
                                 </tr>
@@ -106,7 +106,7 @@ th:replace="~{/site/layout/index::dynamic(~{::title},~{::main})}">
                                         [[${order.createDate}]]
                                     </td>
                                     <td class="shoping__cart__total" style="width: 300px;">
-                                        [[${order.address}]]
+                                        [[${order.account.username}]]
                                     </td>
                                     <td class="shoping__cart__total" style="width: 300px;">
                                         <div class="" style="color: burlywood;" th:if="${order.status}==1">Đang chuẩn bị</div>

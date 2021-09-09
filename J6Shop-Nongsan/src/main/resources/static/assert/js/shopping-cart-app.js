@@ -147,18 +147,32 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
 
     }
     $scope.wishlist.loadWishListFromLocalStorage();
-
+    var  getusername = $("#username").text();
     $scope.order = {
+      
 
+        
         createDate: new Date(),
-        address: "",
-
+        first_name: $("#first_name").text(),
+        last_name: $("#last_name").text(),
+        address_line1: $("#address_line1").text(),
+        address_line2: $("#address_line2").text(),
+        state: $("#state").text(),
+        city: $("#city").text(),
+        postal_code: $("#postal_code").text(),
+        phone_number: $("#phone_number").text(),
         account: {
 
-            username: "ALFKI" //lay username
+            username:  getusername,
+            //lay username
 
 
         },
+        payment_method: "COD",
+     
+
+       
+       
         // $("#username").text()
         //$("#username").text() document.getElementById("username").innerText 
         amount: $scope.cart.amountdiscount,
@@ -177,22 +191,78 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
 
 
             var orders = angular.copy(this);
-            alert("Đặt hàng thành công " + orders.account.username);
+            // alert("Đặt hàng thành công " + orders.account.username);
             //account la mot mang nen ko the post data len dc
-            // $http.post("/lanmarket/api/orders",orders).then(resp =>{
-            //     location.href="/lanmarket/order/detail/"+resp.data.id;
-            //     $scope.cart.clear();
+            $http.post("/lanmarket/api/orders",orders).then(resp =>{
+                location.href="/lanmarket/order/detail/"+resp.data.id;
+                $scope.cart.clear();
 
-            // }).catch(error =>{
-            //     alert("Đặt hàng lỗi"); 
-            //     console.log(error)
-            // })
+            }).catch(error =>{
+                alert("Đặt hàng lỗi"); 
+                console.log(error)
+            })
+
+        }
+    }
+    $scope.orderpaypal = {
+      
+
+        
+        createDate: new Date(),
+        first_name: $("#first_name").text(),
+        last_name: $("#last_name").text(),
+        address_line1: $("#address_line1").text(),
+        address_line2: $("#address_line2").text(),
+        state: $("#state").text(),
+        city: $("#city").text(),
+        postal_code: $("#postal_code").text(),
+        phone_number: $("#phone_number").text(),
+        account: {
+
+            username: getusername //lay username
+
+
+        },
+        payment_method: "Paypal",
+     
+
+       
+       
+        // $("#username").text()
+        //$("#username").text() document.getElementById("username").innerText 
+        amount: $scope.cart.amountdiscount,
+        get orderDetails() {
+            return $scope.cart.items.map(item => {
+                return {
+                    product: {
+                        id: item.id
+                    },
+                    price: item.price - item.price * item.discount / 100,
+                    quantity: item.qty
+                }
+            });
+        },
+        purchase() {
+
+
+            var orders = angular.copy(this);
+            // alert("Đặt hàng thành công " + orders.account.username);
+            //account la mot mang nen ko the post data len dc
+            $http.post("/lanmarket/api/orders",orders).then(resp =>{
+                location.href="/lanmarket/order/detail/"+resp.data.id;
+                $scope.cart.clear();
+
+            }).catch(error =>{
+                alert("Đặt hàng lỗi"); 
+                console.log(error)
+            })
 
         }
     }
 
     var amountToVnd = $scope.cart.amountdiscount / 22500;
     amountTotal = amountToVnd.toFixed(2);
+   
     $scope.opts = {
         createOrder: function (data, actions) {
             return actions.order.create({
@@ -200,24 +270,24 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
 
                 payer: {
                     name: {
-                        given_name: "lan",
-                        surname: "nguyen"
+                        given_name: $("#first_name").text(),
+                        surname: $("#last_name").text(),
                     },
                     address: {
-                        address_line_1: "a",
-                        address_line_2: "b",
-                        admin_area_2: "da nang",
-                        admin_area_1: "hoa khanh",
-                        postol_code: "012121",
+                        address_line_1: $("#address_line1").text(),
+                        address_line_2: $("#address_line2").text(),
+                        admin_area_2: $("#city").text(),
+                        admin_area_1: $("#state").text(),
+                        postol_code: $("#postal_code").text(),
                         country_code: "US"
 
 
                     },
-                    email_address: "nguyenvulan1998@gmail.com",
+                    email_address: $("#email").text(),
                     phone: {
                         phone_type: "MOBILE",
                         phone_number: {
-                            national_number: "0123444"
+                            national_number: $("#phone_number").text(),
                         }
                     }
                 },
@@ -233,10 +303,19 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
         },
 
         onApprove: function (data, actions) {
+            
             return actions.order.capture().then(function(details){
+                
+
                 console.log(details);
+                ///phai biet thanh toan bang paypal hay cod
+                $scope.orderpaypal.purchase(
+                    
+
+                );
                 alert("Cảm ơn bạn đã thanh toán");
-                $scope.order.purchase();
+                
+               
              });
         },
         onCancel: function(data){

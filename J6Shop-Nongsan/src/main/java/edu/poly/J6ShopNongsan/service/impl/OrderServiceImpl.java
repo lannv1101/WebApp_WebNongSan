@@ -7,6 +7,7 @@ import edu.poly.J6ShopNongsan.entity.Product;
 import edu.poly.J6ShopNongsan.entity.SumAmountReport;
 import edu.poly.J6ShopNongsan.repository.OrderDetailRepository;
 import edu.poly.J6ShopNongsan.repository.OrderRepository;
+import edu.poly.J6ShopNongsan.service.AccountService;
 import edu.poly.J6ShopNongsan.service.OrderDetailService;
 import edu.poly.J6ShopNongsan.service.OrderService;
 import edu.poly.J6ShopNongsan.service.ProductService;
@@ -37,6 +38,8 @@ public class OrderServiceImpl implements OrderService {
     OrderDetailService orderdetailService;
     @Autowired
     ProductService productService;
+    @Autowired
+    AccountService accountService;
 
     @Override
     public List<Order> findAll() {
@@ -134,8 +137,11 @@ public class OrderServiceImpl implements OrderService {
 		ObjectMapper mapper = new ObjectMapper();// chuyen doi json
 		Order order = mapper.convertValue(orderData, Order.class);
 		
+	
+//	    order.setAccount(order.getAccount());
 		
 	
+		
 		order.setStatus(0);
 		orderService.save(order); //sai cho save order
 
@@ -153,7 +159,7 @@ public class OrderServiceImpl implements OrderService {
                     System.out.println("quantity"+orderDetail.getQuantity());
                 }
 		orderdetailService.saveAll(details);// luu nhieu orderdetail cùng 1 lúc
-		System.out.println("username"+order.getAccount().getUsername());
+//		System.out.println("username"+order.getAccount().getUsername());
 		return order;
 		
 	}

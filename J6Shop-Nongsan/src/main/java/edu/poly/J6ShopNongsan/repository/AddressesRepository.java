@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AddressesRepository  extends JpaRepository<Addresses,Integer> {
 
@@ -18,5 +19,8 @@ public interface AddressesRepository  extends JpaRepository<Addresses,Integer> {
     public void  deleteByIdAndAccount(Integer addressesId,String username);
 
     Addresses  deleteAddressesByIdAndAccount_Username(Integer id, String account_username);
+
+    @Query("SELECT  a from Addresses a WHERE a.address_default=true and a.account.username = ?1")
+    public Optional<Addresses>  findAddressDefault(String username);
 
 }

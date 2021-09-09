@@ -10,6 +10,9 @@ import java.util.Optional;
 public interface AddressesService {
 
 
+    @Query("SELECT  a from Addresses a WHERE a.address_default=true and a.account.username = ?1")
+    Optional<Addresses> findAddressDefault(String username);
+
     Addresses deleteAddressesByIdAndAccount_Username(Integer id, String account_username);
 
     List<Addresses> findAddressesByAccount_Username(String username);

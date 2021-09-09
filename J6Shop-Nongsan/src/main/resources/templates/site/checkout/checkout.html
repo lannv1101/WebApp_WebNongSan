@@ -85,62 +85,141 @@ th:replace="~{/site/layout/index::dynamic(~{::title},~{::main})}">
             <h4>Chi tiết thanh toán</h4>
             <div   >
                 <div class="row">
-                    <div class="col-lg-8 col-md-6">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="checkout__input">
-                                    <p>Tên Người Đặt Hàng<span>*</span></p>
-                                    <!-- <input id="username" type="text" th:value="${#request.remoteUser}"> -->
-                                    <!-- <div id="username" name="username" th:value="${#request.remoteUser}">  [[${#request.remoteUser}]]</div> -->
-                                    <div class="div-username form-control" style=" color: rgb(255, 2, 2);"  id="username" readonly  >[[${#request.remoteUser}]] </div>
 
-                                
+                    <div class="col-lg-8 col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                               <h5>Giao hàng tới địa chỉ</h5>
+                            </div> 
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="checkout__input">
+                                        <p>Tên Tài Khoản Đặt Hàng<span>*</span></p>
+                                        <div class="form-control" style=" color: rgb(255, 2, 2);"  id="username" readonly  >[[${account.username}]]</div>
+    
+                                    
+                                    </div>
+
+
                                 </div>
+                               
                             </div>
-                            <!-- <div class="col-lg-6">
-                                <div class="checkout__input">
-                                    <p>Last Name<span>*</span></p>
-                                    <input type="text">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="checkout__input">
+                                        <p>Email<span>*</span></p>
+                                        <div class="form-control" style=" color: rgb(255, 2, 2);"  id="email" readonly  >[[${account.email}]]</div>
+    
+                                    
+                                    </div>
+
+
                                 </div>
-                            </div> -->
-                        </div>
-                        <!-- <div class="checkout__input">
-                            <p>Country<span>*</span></p>
-                            <input type="text">
-                        </div> -->
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <div class="checkout__input">
-                                    <p>Ngày Đặt Hàng<span>*</span></p>
-                                    <div style=" color: rgb(255, 2, 2); width: 750px;" readonly  class="form-control">{{order.createDate| date: 'dd-MM-yyyy'}}</div>
-                                    <!-- <input type="text" th:value="${order.createDate | date: 'dd-MM-yyyy'}"> -->
-                                </div>
+                               
                             </div>
-                            <!-- <div class="col-lg-6">
-                                <div class="checkout__input">
-                                    <p>Email<span>*</span></p>
-                                    <input type="text">
+                           
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="checkout__input">
+                                        <p>Ngày Đặt Hàng<span>*</span></p>
+                                        <div style=" color: rgb(255, 2, 2);" readonly  class="form-control" >{{order.createDate| date: 'dd-MM-yyyy'}}</div>
+                                    </div>
                                 </div>
+                              
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="checkout__input">
+                                        <p>Tên<span>*</span></p>
+                                        <div style=" color: rgb(255, 2, 2);" readonly  class="form-control" id="first_name">[[${address.first_name}]]</div>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="checkout__input">
+                                        <p>Họ<span>*</span></p>
+                                        <div style=" color: rgb(255, 2, 2);" readonly  class="form-control" id="last_name">[[${address.last_name}]]</div>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="checkout__input">
+                                        <p>Địa chỉ 1<span>*</span></p>
+                                        <div style=" color: rgb(255, 2, 2);" readonly  class="form-control" id="address_line1">[[${address.address_line1}]]</div>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="checkout__input">
+                                        <p>Địa chỉ 2<span>*</span></p>
+                                        <div style=" color: rgb(255, 2, 2);" readonly  class="form-control" id="address_line2">[[${address.address_line2}]]</div>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="checkout__input">
+                                        <p>Quận/Huyện<span>*</span></p>
+                                        <div style=" color: rgb(255, 2, 2);" readonly  class="form-control" id="state">[[${address.state}]]</div>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="checkout__input">
+                                        <p>Thành phố/Tỉnh<span>*</span></p>
+                                        <div style=" color: rgb(255, 2, 2);" readonly  class="form-control" id="city">[[${address.city}]]</div>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="checkout__input">
+                                        <p>Mã Vùng<span>*</span></p>
+                                        <div style=" color: rgb(255, 2, 2);" readonly  class="form-control" id="postal_code">[[${address.postal_code}]]</div>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="checkout__input">
+                                        <p>Số Điện Thoại<span>*</span></p>
+                                        <div style=" color: rgb(255, 2, 2);" readonly  class="form-control" id="phone_number">[[${address.phone_number}]]</div>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                           
+                            
+                            <!-- <div class="checkout__input">
+                                <p>Địa Chỉ<span>*</span></p>
+                                <input ng-model="order.address" style=" color: rgb(255, 2, 2); height: 200px;"  placeholder="Street Address" class="checkout__input__add"></input>
                             </div> -->
-                        </div>
-                        <div class="checkout__input">
-                            <p>Địa Chỉ<span>*</span></p>
-                            <input ng-model="order.address" style=" color: rgb(255, 2, 2); height: 200px;"  placeholder="Street Address" class="checkout__input__add"></input>
-                            <!-- <input type="text" placeholder="Apartment, suite, unite ect (optinal)"> -->
-                        </div>
+                           
+                           
+                          </div>
                        
-                        <!-- <div class="checkout__input">
-                            <p>Country/State<span>*</span></p>
-                            <input type="text">
-                        </div> -->
+                        
+                        </div>
                        
                      
-                       <div class="card text-left">
+                       <div class="card text-left mt-3">
                          <img class="card-img-top" th:src="@{holder.js/100px180/}" alt="">
                          <div class="card-body">
                            <h4 class="card-title">Phương thức thanh toán</h4>
                            <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" ng-model="order.payment_model" type="checkbox" value="1" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
                               <h5>
                                 Thanh toán khi nhận hàng

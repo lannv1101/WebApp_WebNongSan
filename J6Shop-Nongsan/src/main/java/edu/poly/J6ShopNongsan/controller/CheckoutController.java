@@ -3,7 +3,11 @@ package edu.poly.J6ShopNongsan.controller;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import edu.poly.J6ShopNongsan.entity.Addresses;
+import edu.poly.J6ShopNongsan.service.AccountService;
+import edu.poly.J6ShopNongsan.service.AddressesService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,11 +25,35 @@ import edu.poly.J6ShopNongsan.service.OrderService;
 @Controller
 @RequestMapping("lanmarket")
 public class CheckoutController {
+
+	@Autowired
+	AccountService accountService;
+	@Autowired
+	AddressesService addressesService;
 	@Autowired
 	OrderService orderService;
+
+	@Autowired
+	HttpSession session;
 	@GetMapping("order/checkout")
-    public String checkout(){
-        return "site/checkout/checkout";
+    public String checkout(Model model){
+		String username = (String) session.getAttribute("username");
+
+		Optional<Account> account =accountService.findByUsername(username);
+		Optional<Addresses> addresses = addressesService.findAddressDefault(username);
+
+		if (addresses.isEmpty()){
+			model.addAttribute("address",account.get());
+//			System.out.println("account"+account.get());
+
+		}else {
+			model.addAttribute("address",addresses.get());
+//			System.out.println("addresses"+addresses.get());
+		}
+
+
+		model.addAttribute("account",account.get());//lay email cho paypal
+		return "site/checkout/checkout";
     }
 
 

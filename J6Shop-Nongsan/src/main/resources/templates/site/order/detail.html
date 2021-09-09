@@ -85,30 +85,35 @@ th:replace="~{/site/layout/index::dynamic(~{::title},~{::main})}">
                 </div>
                 <div id="section1ContentId" class="collapse in" role="tabpanel" aria-labelledby="section1HeaderId">
                     <div class="card-body">
-                        <div class="row">
-                         <div class="form-group col-4">
-                             <label for="">Mã Đặt Hàng:</label>
-                             <input type="text" th:field="*{id}" name="" id="" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                      
+                         <div class="form-group col-4 row">
+                             <h4 for="">Mã Đặt Hàng: [[${orders.id}]]</h4>
+                           
                              
                            </div>
-                           <div class="form-group col-4">
-                             <label for="">Người Đặt Hàng:</label>
-                             <input type="text" th:field="*{account.username}" name="" id="" class="form-control" placeholder="" aria-describedby="helpId" readonly>
-                             
-                           </div>
-                           <div class="form-group col-4">
-                             <label for="">Ngày Đặt Hàng:</label>
-                             <input type="text" th:field="*{createDate}" name="" id="" class="form-control" placeholder="" aria-describedby="helpId" readonly>
-                             
-                           </div>
+                           <div class="form-group">
+                            <h5>Địa chỉ giao hàng:</h5>
+                            <div class="row ml-1">
+                              Tên người nhận: [[${orders.first_name}]] [[${orders.last_name}]],
+                                Địa chỉ giao hàng 1: [[${orders.address_line1}]],
+                                Địa chỉ giao hàng 2: [[${orders.address_line2}]],
+                                Quận/Huyện: [[${orders.state}]],
+                                Thành phố/Tỉnh: [[${orders.city}]],
+                                Mã vùng: [[${orders.postal_code}]],
+                                Số điện thoại: [[${orders.phone_number}]].
+
+
+
+
+                            </div>
                         </div>
-                        <div class="row">
-                         <div class="form-group col-12">
-                             <label for="">Địa Chỉ:</label>
-                             <input type="text" th:field="*{address}" name="" id="" class="form-control" placeholder="" aria-describedby="helpId" readonly>
-                             
-                           </div>
-                        </div>
+                           
+                         
+                           
+                      
+                       
+                       
+                       
                        
                     </div>
                 </div>
