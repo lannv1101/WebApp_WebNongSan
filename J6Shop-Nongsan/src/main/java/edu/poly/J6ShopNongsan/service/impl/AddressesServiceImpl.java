@@ -19,6 +19,16 @@ public class AddressesServiceImpl implements AddressesService {
     private AddressesRepository addressesRepository;
 
     @Override
+	public void setDefaultAddress(Integer addressdefaultId, String username) {
+    	if (addressdefaultId >0) {
+    		addressesRepository.setDefaultAddress(addressdefaultId);
+		}
+    	
+    	addressesRepository.setNonDefaultForOthers(addressdefaultId, username);
+    	
+    }
+    
+    @Override
     @Query("SELECT  a from Addresses a WHERE a.address_default=true and a.account.username = ?1")
     public Optional<Addresses> findAddressDefault(String username) {
         return addressesRepository.findAddressDefault(username);

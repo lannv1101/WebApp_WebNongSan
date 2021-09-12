@@ -25,8 +25,9 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
 	
 	Page<Product> findByPriceBetween(Double price1,Double price2,Pageable pageable);
 	
-	@Query("SELECT new ProductCategoryReport(p.category.name, count(p.category)) FROM Product p GROUP BY p.category Order by count(p.category) DESC ")
+	@Query("SELECT new ProductCategoryReport(p.category.name, count(p.category)) FROM Product p GROUP BY p.category order by count(p.category) DESC ")
 	List<ProductCategoryReport> countProductByCate();
+	
 	Optional<Product> findByNameLike(String name);
 
 }

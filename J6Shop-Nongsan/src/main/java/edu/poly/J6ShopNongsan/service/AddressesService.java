@@ -34,4 +34,6 @@ public interface AddressesService {
     void deleteById(Integer integer);
 
     void delete(Addresses entity);
+
+	void setDefaultAddress(Integer addressdefaultId, String username);
 }

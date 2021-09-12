@@ -4,6 +4,9 @@ import edu.poly.J6ShopNongsan.entity.Account;
 import edu.poly.J6ShopNongsan.entity.Addresses;
 import edu.poly.J6ShopNongsan.repository.AddressesRepository;
 import edu.poly.J6ShopNongsan.service.AddressesService;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,22 +16,22 @@ import org.springframework.test.annotation.Rollback;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Rollback(value = false)
 public class AddressRepositoryTest {
     @Autowired
     private AddressesRepository addressesRepository;
 
     @Test
-    @Rollback(value = false)
     public void TestAddressNew(){
         String username = "lanadmin";
         Account account = new Account();
         account.setUsername(username);
         Addresses addresses = new Addresses();
         addresses.setAccount(account);
-        addresses.setFirst_name("Lan Vu");
+        addresses.setFirst_name("Lan Vu2");
         addresses.setLast_name("Nguyen");
-        addresses.setAddress_line1("08 Hà Văn Tính");
-        addresses.setAddress_line2("08 Hà Văn Tính3");
+        addresses.setAddress_line1("08 Hà Văn Tính222");
+        addresses.setAddress_line2("08 Hà Văn Tín133");
         addresses.setCity("Đà Nẵng");
         addresses.setState("Hòa khánh");
         addresses.setPostal_code("05555");
@@ -42,7 +45,6 @@ public class AddressRepositoryTest {
 
     }
     @Test
-    @Rollback(value = false)
     public void TestUpdateAddress(){
         Integer addressId=12;
         Addresses addresses = addressesRepository.findById(addressId).get();
@@ -59,4 +61,20 @@ public class AddressRepositoryTest {
 //
 //        Addresses addressesTestDelete = addressesRepository.deleteById(id);
 //    }
+    @Test
+    public void TestSetDefaultAddress(){
+    	Integer addressId = 14;
+    	addressesRepository.setDefaultAddress(addressId);
+    	
+    	Addresses address = addressesRepository.findById(addressId).get();
+    	assertThat(address.getAddress_default()).isTrue();
+    }
+    @Test
+    public void TestSetNonDefaultAddress(){
+    	Integer addressId = 14;
+    	String username ="lanadmin";
+    	addressesRepository.setNonDefaultForOthers(addressId, username);
+    	
+    	
+    }
 }

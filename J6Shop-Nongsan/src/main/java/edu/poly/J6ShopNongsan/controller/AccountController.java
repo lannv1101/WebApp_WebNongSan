@@ -96,9 +96,11 @@ public class AccountController {
         ra.addFlashAttribute("success","Xóa địa chỉ thành công");
         return "redirect:/lanmarket/account/addresses";
     }
-    @PostMapping("account/addressbook/setdefault/{id}")
+    @GetMapping("account/addressbook/setdefault/{id}")
     public String setDefaultAddress(@PathVariable ("id") Integer addressId, Model model,RedirectAttributes ra){
-
+    	 String username = (String) session.getAttribute("username");
+    	 
+    	 addressesService.setDefaultAddress(addressId, username);
 
         ra.addFlashAttribute("success","Đặt làm địa chỉ giao hàng thành công");
         return "redirect:/lanmarket/account/addresses";
